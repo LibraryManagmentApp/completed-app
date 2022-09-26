@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart.dart' show cart;
+import '../provider/themeprovider.dart';
 import '../widget/cart_item.dart';
 import '../provider/order.dart';
 
@@ -8,11 +9,13 @@ class cartscreen extends StatelessWidget {
   static const routename = '/cart';
   @override
   Widget build(BuildContext context) {
+    var Th=Provider.of<ThemeProvider>(context,listen: true);
     final card = Provider.of<cart>(context);
     return Scaffold(
+      backgroundColor: Th.getColor("thirdColor"),
         appBar: AppBar(
           title: Text("Your Cart"),
-          backgroundColor: Color.fromRGBO(153, 77, 0, 1),
+          backgroundColor:Th.getColor("firstColor"),
         ),
         body: Column(
           children: [

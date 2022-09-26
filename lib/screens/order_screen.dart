@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../provider/themeprovider.dart';
 import '../widget/app_drawer.dart';
 import '../widget/order_item.dart';
 import '../provider/order.dart' show order;
@@ -9,11 +10,13 @@ class orderscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var Th=Provider.of<ThemeProvider>(context,listen: true);
     return Scaffold(
+      backgroundColor: Th.getColor("thirdColor"),
       drawer: appdrawer(),
       appBar: AppBar(
         title: Text("your order"),
-        backgroundColor: Color.fromRGBO(153, 77, 0, 1),
+        backgroundColor: Th.getColor("firstColor"),
       ),
       body: FutureBuilder(
         future: Provider.of<order>(context, listen: false).fetchandsetorder(),

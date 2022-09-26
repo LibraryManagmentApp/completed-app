@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../provider/cart.dart';
+import 'package:two2/screens/search_for_books_free.dart';
+import '../screens/Organization.dart';
 import '../provider/themeprovider.dart';
-import '../screens/cart_screen.dart';
+import '../widget/app_drawer_A.dart';
 import '../widget/app_drawer.dart';
 import 'package:provider/provider.dart';
-import './cart_screen.dart';
-import '../screens/category_page.dart';
-import '../widget/badge.dart';
 import '../widget/Toop.dart';
+import '../screens/category_page.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageA extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageA> createState() => _HomePageAState();
 }
 
-class _HomePageState extends State<HomePage>
+class _HomePageAState extends State<HomePageA>
     with SingleTickerProviderStateMixin {
 
   TabController _tabController;
@@ -23,14 +22,14 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
+    _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
   }
 
   Widget build(BuildContext context) {
     var Th=Provider.of<ThemeProvider>(context,listen: true);
     return Scaffold(
-      drawer:appdrawer(),
-      backgroundColor:Th.getColor("thirdColor"),
+      drawer:appdrawer_A(),
+      backgroundColor: Th.getColor("thirdColor"),
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle,
         child:
@@ -42,28 +41,37 @@ class _HomePageState extends State<HomePage>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
-                    Builder(builder: (context)=>IconButton(
+                    IconButton(
                       onPressed: () {
-                        Scaffold.of(context).openDrawer();
+                        setState(() {
+                          appdrawer.routename;
+                        });
                       },
+                      //Navigator.of(context).pushNamed(appdrawer.routename),
                       icon:Icon(
-                      Icons.menu,
-                      size: 30,
-                      color:Th.getColor("firstColor"),
-                    ),),),
+                        Icons.menu,
+                        size: 30,
+                        color:Th.getColor("firstColor"),
+                      ),),
                     Text('Home',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Th.getColor("firstColor"),fontFamily: "Pacifico",)),
-                    Consumer<cart>(
-                      child: IconButton(
-                        icon: Icon(Icons.shopping_cart,
-                          size: 30,
+                    IconButton(
+                      padding: EdgeInsets.only(right:10),
+                      icon:Icon(Icons.search,
+                        size: 26,
+                        color:Th.getColor("firstColor"),
+                      ),
+                      onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AllBooksFree())
+                      ),
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.mode_edit,
+                          size: 26,
                           color:Th.getColor("firstColor"),
                         ),
                         onPressed: () =>
-                            Navigator.of(context).pushNamed(cartscreen.routename),
+                            Navigator.of(context).pushNamed(Organization.routename),
                       ),
-                      builder: (_, cart, ch) =>
-                          badge(value: cart.itemcount.toString(), child: ch),
-                    ),
+
                   ],
                 ),
               ),
@@ -75,7 +83,7 @@ class _HomePageState extends State<HomePage>
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey.withOpacity(.6),
-                  labelPadding: EdgeInsets.symmetric(horizontal: 29),
+                  labelPadding: EdgeInsets.symmetric(horizontal:80),
                   isScrollable: true,
                   tabs: [
                     Tab(
@@ -86,15 +94,9 @@ class _HomePageState extends State<HomePage>
                     Tab(
                       child: Text(
                         'Categories',
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Th.getColor("secondaryColor")),
+                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color:Th.getColor("secondaryColor")),
                       ),
                     ),
-                    Tab(
-                      child: Text(
-                        'favorite',
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: Th.getColor("secondaryColor")),
-                      ),
-                    )
                   ]),
               SizedBox(height: 20),
               Container(
@@ -105,7 +107,6 @@ class _HomePageState extends State<HomePage>
                     children: [
                       Toop(),
                       CategoryPage(),
-                      Text('data',style: TextStyle(color: Th.getColor("secondaryColor")),)
                     ]),
               ),
             ]

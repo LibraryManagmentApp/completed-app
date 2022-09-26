@@ -8,8 +8,8 @@ import '../screens/aboutUs.dart';
 import '../screens/order_screen.dart';
 import '../screens/search_all_books_page.dart';
 
-class appdrawer extends StatelessWidget {
-  static const routename = '/appdrawer';
+class appdrawer_A extends StatelessWidget {
+  //static const routename = '/appdrawer';
   @override
   Widget build(BuildContext context) {
     var lan=Provider.of<LanguageProvider>(context,listen: true);
@@ -17,7 +17,7 @@ class appdrawer extends StatelessWidget {
     return Drawer(
       backgroundColor:Th.getColor("thirdColor"),
       child: Container(
-        child: Column( 
+        child: Column(
           children: [
             AppBar(
               backgroundColor:Th.getColor("firstColor"),
@@ -47,20 +47,18 @@ class appdrawer extends StatelessWidget {
               title: Text('LIBRARY',style: TextStyle(color:Th.getColor("secondaryColor"),fontWeight:FontWeight.bold),),
               onTap: () => Navigator.of(context).pushReplacementNamed('/'),
             ),
-            ListTile(
-              leading: Icon(Icons.work_rounded,color: Th.getColor("secondaryColor")),
-              title: Text('ORDERS',
-                style: TextStyle(color:Th.getColor("secondaryColor"),fontWeight:FontWeight.bold),
-              ),
+            /*ListTile(
+              leading: Icon(Icons.work_rounded,color: secondaryColor),
+              title: Text('ORDERS',style: TextStyle(color:secondaryColor,fontWeight:FontWeight.bold),),
               onTap: () => Navigator.of(context)
                   .pushReplacementNamed(orderscreen.routename),
-            ),
+            ),*/
             Divider(),
             ListTile(
               leading: Icon(Icons.accessibility,color:Th.getColor("secondaryColor")),
               title: Text('ABOUT US',style: TextStyle(color: Th.getColor("secondaryColor"),fontWeight:FontWeight.bold),),
-              onTap: ()=>Navigator.of(context)
-                  .pushNamed(AboutUs.routename),
+              onTap: () =>Navigator.of(context)
+                .pushNamed(AboutUs.routename),
             ),
             ListTile(
                 leading: Icon(Icons.exit_to_app,color:Th.getColor("secondaryColor"),),

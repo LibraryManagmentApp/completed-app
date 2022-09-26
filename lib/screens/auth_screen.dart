@@ -14,29 +14,6 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          /*Container(
-            width: double.infinity,
-            height:295,
-            decoration:BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft:Radius.circular(6000)),
-              color: firstColor.withOpacity(0.3),
-            ),
-            ///color: Colors.indigo.withOpacity(0.5),
-            ///transform:Matrix4.translationValues(0,-500,0),
-          ),*/
-          /*Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  secondaryColor.withOpacity(0.1),
-                  secondaryColor.withOpacity(0.2),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [0, 1],
-              ),
-            ),
-          ),*/
           SingleChildScrollView(
             child: Container(
               height: deviceSize.height,

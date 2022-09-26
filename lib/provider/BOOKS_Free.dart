@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:two2/models/book.dart';
+import 'package:two2/models/book_free.dart';
 import 'dart:convert';
 import '../models/http_exception.dart';
 
-class products with ChangeNotifier {
-  List<Book> _item = [];
+class productsFree with ChangeNotifier {
+  List<Bookfree> _item = [];
   String authtoken;
   String userid;
 
 //(نستفيد منعا في البروكسي بروفايدر)تابع يقوم بارجاع البيانات
-  getdata(String authtok, String uid, List<Book> prodcts) {
+  getdata(String authtok, String uid, List<Bookfree> prodcts) {
     authtoken = authtok;
     userid = uid;
     _item = prodcts;
@@ -18,78 +18,48 @@ class products with ChangeNotifier {
   }
 
   //تابع استخدمناه لاننا عرفنا المنتجات باريفت
-  List<Book> get item {
+  List<Bookfree> get item {
     return [..._item];
   }
 
-  List<Book> get favoritesitems {
+  List<Bookfree> get favoritesitems {
     return _item.where((proditem) => proditem.isfavorite).toList();
   }
 
-  Book findbyid(String id) {
+  Bookfree findbyid(String id) {
     return _item.firstWhere((prod) => prod.id ==id);
   }
 
-  List<Book> findbycategory(String category){
+  List<Bookfree> findbycategory(String category){
     return _item.where((prod) => prod.category ==category);
   }
 
-  List<Book> BooksList(){
-    List<Book> R;
-   R= fetchandsetproductsNamed() as List<Book>;
-   return R;
+  List<Bookfree> BooksList(){
+    List<Bookfree> R;
+    R= fetchandsetproductsNamed() as List<Bookfree>;
+    return R;
   }
 
-  Future<void> fetchandsetproductsFree() async {
+  Future<List<Bookfree>> fetchandsetproductsNamed() async {
     //final filterstring = filterbyuser ? 'orderBy="creatorId"&equalTo="$userid"' : '';
-    var url = 'https://thisone-186e0-default-rtdb.firebaseio.com/products.json';
+    var url = 'https://thisone-186e0-default-rtdb.firebaseio.com/productsfree.json?auth=$authtoken';
     try {
       final res = await http.get(Uri.parse(url));
-      final extractdata = json.decode(res.body) as Map<String, dynamic>;
-      if (extractdata == null){
-        return;
-      }
-      final List<Book> loadedproducts = [];
-      extractdata.forEach((prodid,proddata) {
-        if(proddata['price']==1){
-          loadedproducts.add(
-            Book(
-              id: prodid,
-              name: proddata['name'],
-              imageUrl: proddata['imageUrl'],
-              category:proddata['category'],
-              price: proddata['price'],
-              description: proddata['description'],
-            ),
-          );
-        }
-      });
-      _item = loadedproducts;
-      notifyListeners();
-    } catch (e) {
-      throw e;
-    }
-  }
+      final extractdata = json.decode(res.body) as
+      Map<String, dynamic>;
 
-  Future<List<Book>> fetchandsetproductsNamed() async {
-    //final filterstring = filterbyuser ? 'orderBy="creatorId"&equalTo="$userid"' : '';
-    var url = 'https://thisone-186e0-default-rtdb.firebaseio.com/products.json?auth=$authtoken';
-    try {
-      final res = await http.get(Uri.parse(url));
-      final extractdata = json.decode(res.body) as Map<String, dynamic>;
-
-      final List<Book> loadedproducts = [];
+      final List<Bookfree> loadedproducts = [];
       extractdata.forEach((prodid, proddata) {
-          loadedproducts.add(
-            Book(
-              id: prodid,
-              name: proddata['name'],
-              imageUrl: proddata['imageUrl'],
-              category: proddata['category'],
-              price: proddata['price'],
-              description: proddata['description'],
-            ),
-          );
+        loadedproducts.add(
+          Bookfree(
+            id: prodid,
+            name: proddata['name'],
+            imageUrl: proddata['imageUrl'],
+            category: proddata['category'],
+            pdf:proddata['pdf'],
+            description: proddata['description'],
+          ),
+        );
       });
       _item = loadedproducts;
       notifyListeners();
@@ -99,40 +69,10 @@ class products with ChangeNotifier {
     }
   }
 
-  Future<void> fetchandsetproductsCat(String categoryName) async {
-    //final filterstring = filterbyuser ? 'orderBy="creatorId"&equalTo="$userid"' : '';
-    var url = 'https://thisone-186e0-default-rtdb.firebaseio.com/products.json';
-    try {
-      final res = await http.get(Uri.parse(url));
-      final extractdata = json.decode(res.body) as Map<String, dynamic>;
-      if (extractdata == null){
-        return;
-      }
-      final List<Book> loadedproducts = [];
-      extractdata.forEach((prodid,proddata) {
-        if(proddata['category']==categoryName){
-        loadedproducts.add(
-          Book(
-            id: prodid,
-            name: proddata['name'],
-            imageUrl: proddata['imageUrl'],
-            category:categoryName,
-            price: proddata['price'],
-            description: proddata['description'],
-          ),
-        );
-        }
-      });
-      _item = loadedproducts;
-      notifyListeners();
-    } catch (e) {
-      throw e;
-    }
-  }
   //تجلب البيانات كم الداتا
   Future<void> fetchandsetproducts([bool filterByUser = false]) async {
     //final filterstring = filterbyuser ? 'orderBy="creatorId"&equalTo="$userid"' : '';
-    var url = 'https://thisone-186e0-default-rtdb.firebaseio.com/products.json?auth=$authtoken';
+    var url = 'https://thisone-186e0-default-rtdb.firebaseio.com/productsfree.json?auth=$authtoken';
     try {
       final res = await http.get(Uri.parse(url));
       final extractdata = json.decode(res.body) as Map<String, dynamic>;
@@ -143,15 +83,15 @@ class products with ChangeNotifier {
       final favres = await http.get(Uri.parse(url));
       final favdata = json.decode(favres.body) ;
 
-      final List<Book> loadedproducts = [];
+      final List<Bookfree> loadedproducts = [];
       extractdata.forEach((prodid, proddata) {
         loadedproducts.add(
-          Book(
+          Bookfree(
             id: prodid,
             name: proddata['name'],
             imageUrl: proddata['imageUrl'],
             category:proddata['category'] ,
-            price: proddata['price'],
+            pdf:proddata['pdf'],
             description: proddata['description'],
             isfavorite: favdata==null?false:favdata[prodid]??false,
           ),
@@ -164,25 +104,25 @@ class products with ChangeNotifier {
     }
   }
 
-  Future<void> addproduct(Book prod) async {
-    final url = 'https://thisone-186e0-default-rtdb.firebaseio.com/products.json?auth=$authtoken';
+  Future<void> addproduct(Bookfree prod) async {
+    final url = 'https://thisone-186e0-default-rtdb.firebaseio.com/productsfree.json?auth=$authtoken';
     try {
       //نضيف البيانات الى السيرفر
       final res = await http.post(Uri.parse(url),
           body: json.encode({
             'name': prod.name,
             'category':prod.category,
-            'price': prod.price,
             'description': prod.description,
+            'pdf':prod.pdf,
             'creatorId':userid,
             'imageUrl': prod.imageUrl,
           }));
       //عطي البيانات الى item_
-      final newproduct = Book(
+      final newproduct = Bookfree(
         id: json.decode(res.body)['name'],
         name: prod.name,
         category:prod.category,
-        price: prod.price,
+        pdf:prod.pdf,
         description: prod.description,
         imageUrl: prod.imageUrl,
       );
@@ -193,18 +133,18 @@ class products with ChangeNotifier {
     }
   }
 
-  Future<void> updateproduct(String id, Book newproduct) async {
+  Future<void> updateproduct(String id, Bookfree newproduct) async {
     final prodindex = _item.indexWhere((prod) => prod.id == id);
     if (prodindex >= 0) {
       //العنصر موجود
       final url =
-          'https://thisone-186e0-default-rtdb.firebaseio.com/products/$id.json?auth=$authtoken';
+          'https://thisone-186e0-default-rtdb.firebaseio.com/productsfree/$id.json?auth=$authtoken';
       await http.patch(Uri.parse(url),
           body: json.encode({
             'name': newproduct.name,
             'imageUrl': newproduct.imageUrl,
             'category':newproduct.category,
-            'price': newproduct.price,
+            'pdf': newproduct.pdf,
             'description': newproduct.description,
           }));
       _item[prodindex] = newproduct;
@@ -215,7 +155,7 @@ class products with ChangeNotifier {
   }
 
   Future<void> deleteproduct(String id) async {
-    final url = 'https://thisone-186e0-default-rtdb.firebaseio.com/products/$id.json?auth=$authtoken';
+    final url = 'https://thisone-186e0-default-rtdb.firebaseio.com/productsfree/$id.json?auth=$authtoken';
     final existingproductindex = _item.indexWhere((prod) => prod.id == id);
     var existingproduct = _item[existingproductindex];
     _item.removeAt((existingproductindex)); //يقوم بحذف العنصر من التطبيق

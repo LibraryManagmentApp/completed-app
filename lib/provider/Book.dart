@@ -3,23 +3,22 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 class product with ChangeNotifier{
   final String id;
-  final String product_name;
-  final String photo;
-  final int quantity;
+  final String imageUrl;
+  final String name;
+  final String category;
   final double price;
-  final String details;
+  final String description;
   bool isfavorite;
 
   product({
     @required this.id,
-    @required this.product_name,
-    @required this.photo,
-    @required this.quantity,
+    @required this.name,
+    @required this.category,
+    @required this.imageUrl,
     @required this.price,
-    @required this.details,
+    @required this.description,
     this.isfavorite=false,
   });
-
 
   void _setfavvalue(bool newvalue){
     isfavorite=newvalue;
@@ -33,7 +32,7 @@ class product with ChangeNotifier{
 
     final url='https://almorjan-cd066-default-rtdb.firebaseio.com/userfavorites/$userid/$id.json?auth=$token';
     try{
-      final res=await http.put(url, body: json.encode(isfavorite));
+      final res=await http.put(Uri.parse(url), body: json.encode(isfavorite));
       if(res.statusCode>=400)
       {
         _setfavvalue(oldstate);

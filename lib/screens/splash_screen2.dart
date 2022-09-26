@@ -16,7 +16,7 @@ class mainsplashscreen extends StatelessWidget {
           children: [
             EasySplashScreen(
               logo: Image.asset("assets/images/logo2.png"),
-              durationInSeconds: 4,
+              durationInSeconds:4,
               showLoader:false,
               loadingText: const Text("loading...",
                   style: TextStyle(
@@ -31,11 +31,11 @@ class mainsplashscreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 620,
+                    height: 550,
                   ),
                   Center(
                     child:SpinKitPumpingHeart(
-                      color: firstColor,
+                      color:firstColor,
                       size: 40,
                       duration: Duration(seconds:2),
                     ),

@@ -1,42 +1,83 @@
 class Book {
+  final String id;
   final String imageUrl;
   final String name;
   final String category;
   final double price;
   final String description;
-
-  Book({this.category, this.description, this.imageUrl, this.name, this.price});
+  bool isfavorite;
+  Book({this.category, this.description, this.imageUrl, this.name, this.price,this.id,this.isfavorite=false,});
 }
 
 List<Book> book = [
   Book(
+    id:'m1',
     name: 'السببيةوميكانيكاالكم',
-    category: 'كتب علمية',
+    category:'Scientific Books',
     price: 25,
-    description: '''هذا الكتاب يُلقي الضوءَ على قضايا فلسفية وعلمية في غاية الأهمية؛ فهو يقدِّم تحريرًا دقيقًا لمفهوم السببية وعَلاقتها بالعلوم المعاصرة، كما يقدِّم براهينَ صلبة ومتماسكة للاستدلال بالسببية على الخالق، وأثناء ذلك يمر على أهم الشبهات والمعارضات ويفنِّدها جميعًا.
-ثم يَعرض لأسباب وأصول التعارض الشهير بين السببية وميكانيكا الكَمِّ؛ ليظهر بجلاء أن المشكلة لم تكن يومًا بين السببية وميكانيكا الكم، وإنما كانت دائمًا مشكلة الحتمية مع ميكانيكا الكم. والسببيةُ مفهوم منفصل ومستقل تمامًا عن الحتمية.
-وقد آثرتُ الابتعادَ عن التفاصيل الدقيقة التي يصعب على غير المتخصصين الإلمام بها. مع حرصي على دقة التوثيق العلمي، فغالبية المصادر كانت من أوراق علمية مُحكمة حديثة النشر.
-أرجو أن يُغني هذا الكتاب القرَّاءَ عن رحلة بحث طويلة وشائكة خلال الفلسفات المتضاربة حول مفهوم السببية ودلالاته. كما أرجو أن يثير شغَفَهم حول مجالات علمية واعدة وحديثة داخل فيزياء الكم تحتضن السببيةَ وتعتمد على تطبيقاتها.
-وأظن أن الكتاب مناسب للجميع.. وأرجو أن ينتفع به المسلمُ، واللاأدري، والملحد، ومحِبُّو الفلسفة، ومُحبُّو العلوم الفيزيائية والرياضيات، وكلُّ مَن يهتم ويقتطع من وقته شيئًا لقراءة هذا الكتاب. ''',
+    description:
+    'هذا الكتاب يُلقي الضوءَ على قضايا فلسفية وعلمية في غاية الأهمية'
+    ' فهو يقدِّم تحريرًا دقيقًا لمفهوم السببية وعَلاقتها بالعلوم المعاصرة'
+    'كما يقدِّم براهينَ صلبة ومتماسكة للاستدلال بالسببية على الخالق'
+    'وأثناء ذلك يمر على أهم الشبهات والمعارضات ويفنِّدها جميعًا'
+    'والسببيةُ مفهوم منفصل ومستقل تمامًا عن الحتمية',
     imageUrl: 'assets/images/ph0.jpg',
   ),
   Book(
+    id:'m2',
     name: 'ابق قويا',
-    category: 'كتب تطوير الذات',
+    category: 'Scientific Books',
     price: 25,
-    description: '',
+    description: 'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj'
+        'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj'
+        'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj'
+        'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj'
+        'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj'
+        'mcnhr kgntejgnerm jdnvjkdfbdflb'
+        'ndjnvnfbfdkbdfnbdfbfdmnbfnlb'
+        'vsdnbvfdvkfsnklosmmek;l,m'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj'
+        'kdmenfjnfnfmmkffnkjf'
+        'kdjfnmlkdmvndnvjvkllkvj',
+
     imageUrl: 'assets/images/ph1.jpg',
   ),
   Book(
+    id:'m3',
     name: 'رحلتي من الشك الى الايمان',
-    category: 'كتب فلسفية',
+    category: 'Novels',
     price: 25,
-    description: '',
+    description:'',
     imageUrl: 'assets/images/ph2.jpg',
   ),
   Book(
+    id:'m4',
     name: 'ليلى والذئب',
-    category: 'كتب أطفال',
+    category: 'Childrens Book',
     price: 25,
     description:'',
     imageUrl: 'assets/images/ph3.jpg',

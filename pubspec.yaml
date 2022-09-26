@@ -26,11 +26,15 @@ dependencies:
 
   provider: ^4.3.2+2
   intl: ^0.16.1
-  http: ^0.12.2
+  http: ^0.13.0
   shared_preferences: ^2.0.15
   easy_splash_screen: ^1.0.3
   like_button: ^2.0.2
   flutter_spinkit: ^5.1.0
+  #syncfusion_flutter_pdfviewer: ^19.1.69-beta
+  #pdf: ^3.8.2
+  #firebase_core: ^1.20.0
+  #firebase_database: ^9.0.20
 
 
   # The following adds the Cupertino Icons font to your application.

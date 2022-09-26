@@ -1,12 +1,7 @@
-List<String>title = [
-  "كتب أطفال",
-  "روايات",
-  "قصص",
-  "كتب علمية",
-];
-List<String>images = [
-  'assets/images/kids.jpg',
-  'assets/images/roayat.jpg',
-  'assets/images/story.jpg',
-  'assets/images/sint.jpg',
-];
+class Category {
+  final String id;
+  final String imageUrl;
+  final String title;
+
+ const Category({this.imageUrl, this.title,this.id});
+}

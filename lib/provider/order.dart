@@ -35,7 +35,7 @@ class order with ChangeNotifier{
   Future <void> fetchandsetorder()async {
     final url = 'https://almorjan-cd066-default-rtdb.firebaseio.com/orders/$userid.json?auth=$authtoken';
     try {
-      final res = await http.get(url);
+      final res = await http.get(Uri.parse(url));
       final extractdata = json.decode(res.body) as Map<String, dynamic>;
       if (extractdata == null) {
         return;
@@ -69,7 +69,7 @@ class order with ChangeNotifier{
     final url = 'https://almorjan-cd066-default-rtdb.firebaseio.com/orders/$userid.json?auth=$authtoken';
     try {
       final timestamp=DateTime.now();
-      final res = await http.post(url,
+      final res = await http.post(Uri.parse(url),
           body: json.encode({
             'amount':total,
             'datetime':timestamp.toIso8601String(),
